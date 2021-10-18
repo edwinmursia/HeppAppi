@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "HeppAppi",
+    "slug": "HeppAppi",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "HeppAppi"
+}

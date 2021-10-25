@@ -1,0 +1,21 @@
+WAY OF WORKING
+
+1. Commit early and often!
+	1.1. Make your commit messages clear and precise.
+	1.2. Same single-purpose commits.
+
+2. If you break it, you fix it.
+	2.1. Communicate with team when errors happen.
+
+3. If you are not sure or have questions: ask! 
+	3.1. If someone needs help: help!
+
+4. Always use a branch when working. 
+	4.1. Default to your own branch.
+
+5. Make pull requests when your code is clean, stable and working.
+	5.1. Make single-purpose pull requests.
+
+6. Review pull requests and communicate with team as soon as possible.
+	6.1. Add comments when needed.
+

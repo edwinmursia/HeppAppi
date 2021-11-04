@@ -1,20 +1,24 @@
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Pressable, SafeAreaView, StyleSheet, Text, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function StartingScreen() {
+
+  const navigation = useNavigation()
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.textWelcome}>Tervetuloa HeppAppiin</Text>
       <Image source={require('../images/horse.png')} style={{height: 250, width: 250, marginBottom: 10, marginTop: 10}} />
       <TouchableOpacity>
-        <Pressable style={styles.buttonLogIn} >
+        <Pressable style={styles.buttonLogIn} onPress={() => navigation.navigate("LogInScreen")} >
           <Text style={styles.text} >Kirjaudu Sisään</Text>
         </Pressable>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Pressable style={styles.buttonSignIn} >
+        <Pressable style={styles.buttonSignIn} onPress={() => navigation.navigate("RegisterScreen")} >
           <Text style={styles.textSignIn} >Rekisteröidy</Text>
         </Pressable>
       </TouchableOpacity>

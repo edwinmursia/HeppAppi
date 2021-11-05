@@ -7,7 +7,7 @@ const LogInScreen = () => {
 
     const navigation = useNavigation()
     const goBack = () => {
-        navigation.goBack()
+        navigation.navigate("RegisterScreen")
     }
 
     return (

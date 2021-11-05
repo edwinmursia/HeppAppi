@@ -15,7 +15,7 @@ const LogInScreen = () => {
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
                 <Icon name='chevron-back' size={30} color="#000" style={{ marginRight: -22 }} />
                 <Icon name='chevron-back' size={30} color="#000" />
-                <Text style={{ fontSize: 20, fontWeight: 'bold', marginTop: 1 }} >Takaisin</Text>
+                <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Image source={require('../images/horse.png')} style={{ height: 200, width: 200, marginBottom: 20, marginTop: 10 }} />
             <TextInput style={styles.input} placeholder="Sähköposti" />
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         height: 40,
         bottom: '30%',
         right: 90,
+        alignItems: 'center'
     },
     input: {
         height: 50,

@@ -12,7 +12,7 @@ export default function StartingScreen() {
     <SafeAreaView style={styles.container}>
       <Text style={styles.textWelcome}>Tervetuloa HeppAppiin</Text>
       <Image source={require('../images/horse.png')} style={{height: 250, width: 250, marginBottom: 10, marginTop: 10}} />
-      <TouchableOpacity onPress={() => navigation.navigate("LogInScreen")} >
+      <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")} >
         <Pressable style={styles.buttonLogIn} >
           <Text style={styles.text} >Kirjaudu Sisään</Text>
         </Pressable>

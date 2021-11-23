@@ -2,20 +2,23 @@ import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
-import RadioButton from "rn-radio-button";
+import { CheckBox } from 'react-native-elements'
 
 const RegisterScreen = () => {
-
-    console.log(RadioButton);
-    const [val, setVal] = useState("-");
-
-    function pressCircle(i) {
-        setVal(i);
-    }
+    const [checked, setchecked] = useState(false);
 
     const navigation = useNavigation()
     const goBack = () => {
         navigation.goBack()
+    }
+
+    const goForward = () => {
+        if (checked) {
+            console.log('You can go.')
+            navigation.navigate('StartingScreen')
+        } else {
+            console.log('You cant go.')
+        }
     }
 
     return (
@@ -30,27 +33,22 @@ const RegisterScreen = () => {
             <TextInput style={styles.input} placeholder="Sähköposti" />
             <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
             <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
-            <View style={styles.radioButtonContainer} >
-                <RadioButton
-                    outerWidth={30}
-                    innerWidth={20}
-                    borderWidth={2}
-                    data={listData}
-                    color={"#66CE26"}
-                    onPress={pressCircle}
-                    wrapperStyle={{ padding: 3 }}
+            <View style={styles.checkboxContainer} >
+                <CheckBox
+                    title="Olen lukenut ja hyväksyn tietosuojaselosteen ja käyttöehdot"
+                    checked={checked}
+                    checkedColor={'#66CE26'}
+                    containerStyle={{ backgroundColor: 'white', borderColor: 'white' }}
+                    size={26}
+                    onPress={() => setchecked(!checked)}
                 />
             </View>
-            <Pressable style={styles.buttonRegister} >
+            <Pressable style={styles.buttonRegister} onPress={goForward}>
                 <Text style={styles.text} >Rekisteröidy</Text>
             </Pressable>
         </SafeAreaView>
     )
 }
-
-const listData = [
-    { label: "Olen lukenut ja hyväksyn tietosuojaselosteen ja käyttöehdot", value: 1 }
-];
 
 export default RegisterScreen
 
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
     IconWrapper: {
         flexDirection: 'row',
         height: 40,
-        bottom: '25%',
+        bottom: '15%',
         right: 90,
         alignItems: 'center'
     },
@@ -96,7 +94,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         margin: 10
     },
-    radioButtonContainer: {
+    checkboxContainer: {
         paddingTop: 20,
         width: '70%',
     }

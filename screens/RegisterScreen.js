@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
@@ -14,10 +15,12 @@ const RegisterScreen = () => {
 
     const goForward = () => {
         if (checked) {
+            //Jos kaikki kohdat on täytetty ja salasana ja vahvista salasana ovat samat ->
             console.log('You can go.')
             navigation.navigate('StartingScreen')
         } else {
             console.log('You cant go.')
+            //Else pois
         }
     }
 
@@ -28,11 +31,15 @@ const RegisterScreen = () => {
                 <Icon name='chevron-back' size={30} color="#000" />
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
+            <Text style={{fontSize: 12, width: '80%', textAlign: 'center', textTransform: 'uppercase', color: 'red'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
             <TextInput style={styles.input} placeholder="Etunimi" />
             <TextInput style={styles.input} placeholder="Sukunimi" />
             <TextInput style={styles.input} placeholder="Sähköposti" />
             <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
             <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
+            <TouchableOpacity>
+                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} onPress={() => navigation.navigate('PrivacyPolicyScreen')} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
+            </TouchableOpacity>
             <View style={styles.checkboxContainer} >
                 <CheckBox
                     title="Olen lukenut ja hyväksyn tietosuojaselosteen ja käyttöehdot"
@@ -43,9 +50,11 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <Pressable style={styles.buttonRegister} onPress={goForward}>
-                <Text style={styles.text} >Rekisteröidy</Text>
-            </Pressable>
+            <TouchableOpacity onPress={goForward}>
+                <Pressable style={styles.buttonRegister}>
+                    <Text style={styles.text} >Rekisteröidy</Text>
+                </Pressable>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -63,9 +72,9 @@ const styles = StyleSheet.create({
     IconWrapper: {
         flexDirection: 'row',
         height: 40,
-        bottom: '15%',
+        bottom: '5%',
         right: 90,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     input: {
         height: 50,

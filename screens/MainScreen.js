@@ -1,7 +1,9 @@
-import React from 'react';
-import { Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, SafeAreaView, StyleSheet, Text, View, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 LocaleConfig.locales['fi'] = {
     monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
@@ -12,16 +14,39 @@ LocaleConfig.locales['fi'] = {
 LocaleConfig.defaultLocale = 'fi';
 
 const MainScreen = () => {
+
+    const [dayValue, setDayValue] = useState('');
+    const navigation = useNavigation();
+
+    const saveValue = async () => {
+        if (dayValue) {
+            AsyncStorage.setItem('dayOne', JSON.stringify(dayValue))
+            setDayValue('');
+            console.log(await AsyncStorage.getItem('dayOne'))
+        }
+    }
+
     return (
         <SafeAreaView style={styles.container} >
             <View style={styles.upperContainer}>
                 <Text style={styles.welcomeText} >Tervetuloa Etunimi!</Text>
                 <Icon name='ellipsis-vertical' size={20} style={{ paddingRight: 25 }} color='#fff' />
             </View>
+            <Text style={{ fontSize: 12, width: '85%', textAlign: 'center', textTransform: 'uppercase', color: 'red', paddingTop: 20 }} >
+                Varataksesi päivän paina ensin kalenterin päivästä, joka on vihreällä merkitty ja tämän jälkeen paina "Tee varaus" painikkeesta.
+            </Text>
             <Calendar
                 enableSwipeMonths={true}
                 style={styles.calendar}
                 minDate={Date()}
+                onDayPress={(dayValue) => setDayValue(dayValue.dateString)}
+                // Dates that the teacher marks in the calendar.
+                markedDates={{
+                    '2021-12-16': { selectedColor: 'green', selected: true },
+                    '2021-12-19': { selectedColor: 'green', selected: true },
+                    '2021-12-29': { selectedColor: 'green', selected: true },
+                    '2021-12-30': { selectedColor: 'green', selected: true }
+                }}
                 theme={{
                     arrowColor: '#518B35',
                     todayTextColor: '#518B35',
@@ -29,6 +54,9 @@ const MainScreen = () => {
                     textSectionTitleColor: '#518B35'
                 }}
             />
+            <Pressable style={styles.buttonLogIn} onPress={saveValue} >
+                <Text style={styles.text} >Tee varaus</Text>
+            </Pressable>
         </SafeAreaView>
     )
 }
@@ -70,5 +98,20 @@ const styles = StyleSheet.create({
         maxHeight: 350,
         width: 375,
         maxWidth: 375
+    },
+    buttonLogIn: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#66CE26',
+        height: 35,
+        width: 220,
+        marginTop: 15,
+        borderRadius: 20,
+        borderColor: 'black',
+        borderWidth: 2
+    },
+    text: {
+        color: '#fff',
+        fontWeight: 'bold'
     }
 });

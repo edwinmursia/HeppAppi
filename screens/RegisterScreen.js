@@ -16,11 +16,7 @@ const RegisterScreen = () => {
     const goForward = () => {
         if (checked) {
             //Jos kaikki kohdat on täytetty ja salasana ja vahvista salasana ovat samat ->
-            console.log('You can go.')
             navigation.navigate('MainScreen')
-        } else {
-            console.log('You cant go.')
-            //Else pois
         }
     }
 

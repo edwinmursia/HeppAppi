@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Platform, SafeAreaView, StyleSheet, Text, View, Pressable } from 'react-native';
+import { Platform, SafeAreaView, StyleSheet, Text, View, Pressable, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
@@ -18,11 +18,16 @@ const MainScreen = () => {
     const [dayValue, setDayValue] = useState('');
     const navigation = useNavigation();
 
+    const navFunction = () => {
+        navigation.navigate('ReservationScreen')
+    }
+
     const saveValue = async () => {
         if (dayValue) {
             AsyncStorage.setItem('dayOne', JSON.stringify(dayValue))
             setDayValue('');
             console.log(await AsyncStorage.getItem('dayOne'))
+            navFunction()
         }
     }
 
@@ -54,9 +59,10 @@ const MainScreen = () => {
                     textSectionTitleColor: '#518B35'
                 }}
             />
-            <Pressable style={styles.buttonLogIn} onPress={saveValue} >
+            <TouchableOpacity style={styles.buttonLogIn} onPress={saveValue} >
                 <Text style={styles.text} >Tee varaus</Text>
-            </Pressable>
+            </TouchableOpacity>
+            <Text style={{paddingTop: 30, fontSize: 16, fontWeight: '900'}} >Ei uusia varauksia</Text>
         </SafeAreaView>
     )
 }

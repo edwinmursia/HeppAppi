@@ -1,20 +1,38 @@
 {
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
-    "start": "react-native start"
+    "start": "node backend/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server"
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
     "@react-navigation/stack": "^6.0.11",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cli": "^1.0.1",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "expo": "^42.0.5",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.8.1",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.14",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "passport": "^0.5.0",
+    "passport-google-oauth20": "^2.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
@@ -25,10 +43,34 @@
     "react-native-unimodules": "0.14.10",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "~0.13.12",
-    "rn-radio-button": "^1.0.2"
+    "realm-cli": "^1.0.2",
+    "rn-radio-button": "^1.0.2",
+    "sequelize": "^6.12.0-alpha.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.15"
   },
-  "private": true
+  "private": true,
+  "name": "heppappi",
+  "version": "1.0.0",
+  "description": "nodejs mongodb",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwinmursia/HeppAppi.git"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "jwt",
+    "authentication",
+    "mongodb"
+  ],
+  "author": "heppappi team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edwinmursia/HeppAppi/issues"
+  },
+  "homepage": "https://github.com/edwinmursia/HeppAppi#readme"
 }

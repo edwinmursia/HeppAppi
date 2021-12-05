@@ -5,7 +5,7 @@ import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 import ReservationCard from '../components/ReservationCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import IconCalendar from 'react-native-vector-icons/Feather';
+import { useIsFocused } from '@react-navigation/native';
 
 LocaleConfig.locales['fi'] = {
     monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
@@ -20,6 +20,26 @@ const MainScreen = () => {
     const [dayValue, setDayValue] = useState('');
     const navigation = useNavigation();
 
+    const isFocused = useIsFocused();
+    const [time, setTime] = useState('');
+    const [date, setDate] = useState('')
+
+    const getTime = () => {
+        AsyncStorage.getItem('time')
+            .then((time) => {
+                setTime(time);
+            }, [isFocused])
+    }
+    const getDate = () => {
+        AsyncStorage.getItem('dayOne')
+            .then((date) => {
+                setDate(date);
+            }, [isFocused])
+    }
+
+    getTime.apply(time)
+    getDate.apply(date)
+
     const navFunction = () => {
         navigation.navigate('ReservationScreen')
     }
@@ -31,6 +51,14 @@ const MainScreen = () => {
             console.log(await AsyncStorage.getItem('dayOne'))
             navFunction()
         }
+    }
+
+    let theContent;
+
+    if (time && date) {
+        theContent = <ReservationCard />
+    } else {
+        theContent = <Text style={{ paddingTop: 5, fontSize: 16, fontWeight: '900' }} >Sinulla ei ole uusia varauksia</Text>
     }
 
     return (
@@ -64,8 +92,8 @@ const MainScreen = () => {
             <TouchableOpacity style={styles.buttonLogIn} onPress={saveValue} >
                 <Text style={styles.text} >Tee varaus</Text>
             </TouchableOpacity>
-            <Text style={{paddingTop: 30, fontSize: 16, fontWeight: '900'}} >Sinulla ei ole uusia varauksia</Text>
-            <ReservationCard />
+            <Text style={{ paddingTop: 30, fontSize: 16, fontWeight: 'bold' }} >Varaukseni:</Text>
+            {theContent}
         </SafeAreaView>
     )
 }

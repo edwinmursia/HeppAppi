@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, Pressable 
 import DropDownPicker from 'react-native-dropdown-picker';
 import BackButton from '../components/BackButton';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ReservationScreen = () => {
 
@@ -12,20 +13,28 @@ const ReservationScreen = () => {
     const [valueHorses, setValueHorses] = useState(null);
     const [horses, setHorses] = useState([
         { label: 'Omppu', value: 'Omppu' },
-        { label: 'Santtu', value: 'santtu' },
-        { label: 'Koffi', value: 'koffi' }
+        { label: 'Santtu', value: 'Santtu' },
+        { label: 'Koffi', value: 'Koffi' }
     ]);
 
     const [openTimes, setOpenTimes] = useState(false);
     const [valueTimes, setValueTimes] = useState(null);
     const [times, setTimes] = useState([
-        { label: '12:00 - 14:00', value: '12' },
-        { label: '14:00 - 16:00', value: '14' },
-        { label: '16:00 - 18:00', value: '16' }
+        { label: '12:00 - 14:00', value: '12:00-14:00' },
+        { label: '14:00 - 16:00', value: '14:00-16:00' },
+        { label: '16:00 - 18:00', value: '16:00-18:00' }
     ]);
 
-    const goForward = () => {
-        navigation.navigate('MainScreen')
+    const goForward = async () => {
+        if (valueHorses && valueTimes) {
+            AsyncStorage.setItem('horse', JSON.stringify(valueHorses))
+            AsyncStorage.setItem('time', JSON.stringify(valueTimes))
+            setValueHorses('');
+            setValueTimes('');
+            console.log(await AsyncStorage.getItem('horse'))
+            console.log(await AsyncStorage.getItem('time'))
+            navigation.navigate('MainScreen')
+        }
     }
 
     return (
@@ -92,6 +101,11 @@ const styles = StyleSheet.create({
                 marginTop: '10%'
             },
         }),
+        ...Platform.select({
+            ios: {
+                marginLeft: '3.2%'
+            }
+        })
     },
     dropDownTimes: {
         width: '85%',

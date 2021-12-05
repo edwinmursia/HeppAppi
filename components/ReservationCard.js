@@ -1,8 +1,34 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import IconCalendar from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native';
 
 const ReservationCard = () => {
+
+    const isFocused = useIsFocused();
+    const [time, setTime] = useState('');
+    const [date, setDate] = useState('')
+
+    const getAllValues = () => {
+
+        const getTime = () => {
+            AsyncStorage.getItem('time')
+            .then((time) => {
+                setTime(time);
+            }, [isFocused])
+        }
+        const getDate = () => {
+            AsyncStorage.getItem('dayOne')
+            .then((date) => {
+                setDate(date);
+            }, [isFocused])
+        }
+
+        getTime.apply(time)
+        getDate.apply(date)
+    }
+
     return (
         <View style={styles.cardWrapper}>
             <View style={styles.calendarLogoWrapper}>
@@ -10,12 +36,12 @@ const ReservationCard = () => {
                     <IconCalendar name='calendar' size={25} color='#fff' />
                 </View>
             </View>
-            <View style={styles.reservationInfoWrapper}>
+            <View onLayout={getAllValues} style={styles.reservationInfoWrapper}>
                 <View style={styles.reservationTimeAndDate}>
-                    <Text style={{ fontWeight: 'bold' }}>Klo 12:00 - 14:00</Text>
-                    <Text style={{ paddingRight: 10, color: 'grey' }}>26. Kesä 2021</Text>
+                    <Text style={{ fontWeight: 'bold' }}>{time.replace(/['"]+/g, '')}</Text>
+                    <Text style={{ paddingRight: 10, color: 'grey' }}>{date.replace(/['"]+/g, '')}</Text>
                 </View>
-                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</Text>
+                <Text>Muista muokata tai poistaa ajanvaraus tarvittaessa!</Text>
             </View>
         </View>
     )
@@ -31,7 +57,8 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         backgroundColor: '#eeeeee',
         flexDirection: 'row',
-        borderWidth: 1
+        borderWidth: 1,
+        marginTop: 5
     },
     calendarLogoWrapper: {
         flexDirection: 'column',

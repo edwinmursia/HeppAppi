@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingRight: '55%',
         alignItems: 'center',
-        marginTop: '20%'
+        marginTop: '10%',
+        marginBottom: '10%',
+        ...Platform.select({
+            android: {
+                marginTop: '20%'
+            },
+        })
     }
 });

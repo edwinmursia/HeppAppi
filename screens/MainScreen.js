@@ -3,7 +3,9 @@ import { Platform, SafeAreaView, StyleSheet, Text, View, Pressable, TouchableOpa
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
+import ReservationCard from '../components/ReservationCard';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import IconCalendar from 'react-native-vector-icons/Feather';
 
 LocaleConfig.locales['fi'] = {
     monthNames: ['Tammikuu', 'Helmikuu', 'Maaliskuu', 'Huhtikuu', 'Toukokuu', 'Kesäkuu', 'Heinäkuu', 'Elokuu', 'Syyskuu', 'Lokakuu', 'Marraskuu', 'Joulukuu'],
@@ -62,7 +64,8 @@ const MainScreen = () => {
             <TouchableOpacity style={styles.buttonLogIn} onPress={saveValue} >
                 <Text style={styles.text} >Tee varaus</Text>
             </TouchableOpacity>
-            <Text style={{paddingTop: 30, fontSize: 16, fontWeight: '900'}} >Ei uusia varauksia</Text>
+            <Text style={{paddingTop: 30, fontSize: 16, fontWeight: '900'}} >Sinulla ei ole uusia varauksia</Text>
+            <ReservationCard />
         </SafeAreaView>
     )
 }

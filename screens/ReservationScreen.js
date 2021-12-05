@@ -57,7 +57,7 @@ const ReservationScreen = () => {
             <Text style={styles.infoText} >Tekemällä varauksen vahvistan, että antamani tiedot on oikein.</Text>
             <Text style={styles.infoText} >Ymmärrän, että perumattomasta varauksesta voidaan periä maksu.</Text>
             <TouchableOpacity onPress={goForward} style={styles.buttonRegister}>
-                <Text style={styles.text} >Rekisteröidy</Text>
+                <Text style={styles.text} >Vahvista varaus</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )

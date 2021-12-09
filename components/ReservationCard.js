@@ -1,14 +1,20 @@
-import React, {useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import IconCalendar from 'react-native-vector-icons/Feather';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const ReservationCard = () => {
 
+    const navigation = useNavigation();
     const isFocused = useIsFocused();
     const [time, setTime] = useState('');
     const [date, setDate] = useState('')
+
+    const navFunction = () => {
+        navigation.navigate('EditReservationScreen')
+    }
 
     const getAllValues = () => {
 
@@ -30,20 +36,22 @@ const ReservationCard = () => {
     }
 
     return (
-        <View style={styles.cardWrapper}>
-            <View style={styles.calendarLogoWrapper}>
-                <View style={styles.calendarLogoContainer}>
-                    <IconCalendar name='calendar' size={25} color='#fff' />
+        <TouchableOpacity onPress={navFunction}>
+            <View style={styles.cardWrapper}>
+                <View style={styles.calendarLogoWrapper}>
+                    <View style={styles.calendarLogoContainer}>
+                        <IconCalendar name='calendar' size={25} color='#fff' />
+                    </View>
+                </View>
+                <View onLayout={getAllValues} style={styles.reservationInfoWrapper}>
+                    <View style={styles.reservationTimeAndDate}>
+                        <Text style={{ fontWeight: 'bold' }}>{time.replace(/['"]+/g, '')}</Text>
+                        <Text style={{ paddingRight: 10, color: 'grey' }}>{date.replace(/['"]+/g, '')}</Text>
+                    </View>
+                    <Text>Muista muokata tai poistaa ajanvaraus tarvittaessa!</Text>
                 </View>
             </View>
-            <View onLayout={getAllValues} style={styles.reservationInfoWrapper}>
-                <View style={styles.reservationTimeAndDate}>
-                    <Text style={{ fontWeight: 'bold' }}>{time.replace(/['"]+/g, '')}</Text>
-                    <Text style={{ paddingRight: 10, color: 'grey' }}>{date.replace(/['"]+/g, '')}</Text>
-                </View>
-                <Text>Muista muokata tai poistaa ajanvaraus tarvittaessa!</Text>
-            </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
         height: 45,
         maxHeight: 45,
         width: '50%',
-        borderRadius: 45/2,
+        borderRadius: 45 / 2,
         top: 10,
         justifyContent: 'center',
         alignItems: 'center'

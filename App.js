@@ -9,6 +9,7 @@ import MainScreen from './screens/MainScreen';
 import ReservationScreens from './screens/ReservationScreen';
 import SettingsScreen from './screens/SettingsScreen'
 import UserSettingsScreen from './screens/UserSettingsScreen';
+import EditReservationScreen from './screens/EditReservationScreen'
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="ReservationScreen" component={ReservationScreens} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="UserSettingsScreen" component={UserSettingsScreen} />
+        <Stack.Screen name="EditReservationScreen" component={EditReservationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

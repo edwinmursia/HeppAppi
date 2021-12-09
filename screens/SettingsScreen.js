@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
+import BackButton from '../components/BackButton';
 
 const SettingsScreen = () => {
 
@@ -14,25 +15,25 @@ const SettingsScreen = () => {
         navigation.goBack()
     }
 
+    const goForward = () => {
+        navigation.navigate('MainScreen')
+    }
+
     return (
         <SafeAreaView style={styles.container} >
-            <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
-                <Icon name='chevron-back' size={30} color="#000" style={{ marginRight: -22 }} />
-                <Icon name='chevron-back' size={30} color="#000" />
-                <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
-            </TouchableOpacity>
+            <BackButton />
             <TextInput style={styles.input} placeholder="Hevosen kutsumanimi" />
             <TextInput style={styles.input} placeholder="Sukupuoli" />
             <TextInput style={styles.input} placeholder="Ikä" />
             <TextInput style={styles.input} placeholder="Rotu"/>
             <TextInput style={styles.input} placeholder="Osoite"/>
-            <TextInput style={styles.input1} placeholder="Lisätietoja hevosesta..."/>
-            <Pressable style={styles.buttonLogIn} >
+            <TextInput multiline={true} numberOfLines={6} style={styles.inputMultiline} placeholder={'Lisätietoja hevosesta...'} />
+            <TouchableOpacity style={styles.button} onPress={goForward} >
                 <Text style={styles.text} >Päivitä tiedot</Text>
-                </Pressable>
-            <Pressable style={styles.buttonLogIn} >
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} >
                 <Text style={styles.text} >Poista hevonen</Text>
-                </Pressable>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -54,17 +55,6 @@ const styles = StyleSheet.create({
         right: 90,
         alignItems: 'center'
     },
-    buttonLogIn: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#0b6122',
-        height: 45,
-        width: 240,
-        marginTop: 5,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
-    },
     input: {
         height: 50,
         margin: 6,
@@ -81,13 +71,23 @@ const styles = StyleSheet.create({
         width: '70%',
         paddingLeft: 10
     },
-    buttonRegister: {
+    inputMultiline: {
+        height: 200,
+        margin: 10,
+        borderWidth: 2,
+        borderRadius: 10,
+        width: '70%',
+        paddingLeft: 10,
+        textAlignVertical: 'top',
+        paddingTop: 10
+    },
+    button: {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
         height: 35,
         width: 220,
-        marginTop: 30,
+        marginTop: 10,
         borderRadius: 20,
         borderColor: 'black',
         borderWidth: 2

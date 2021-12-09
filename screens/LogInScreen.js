@@ -10,6 +10,10 @@ const LogInScreen = () => {
         navigation.goBack()
     }
 
+    const goForward = () => {
+        navigation.navigate('MainScreen')
+    }
+
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -20,9 +24,9 @@ const LogInScreen = () => {
             <Image source={require('../images/horse.png')} style={{ height: 200, width: 200, marginBottom: 20, marginTop: 10 }} />
             <TextInput style={styles.input} placeholder="Sähköposti" />
             <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
-            <Pressable style={styles.buttonLogIn} >
+            <TouchableOpacity style={styles.buttonLogIn} onPress={goForward}>
                 <Text style={styles.text} >Kirjaudu</Text>
-            </Pressable>
+            </TouchableOpacity>
             <TouchableOpacity>
                 <Text style={styles.passwordText} >Unohtuiko salasana?</Text>
             </TouchableOpacity>

@@ -17,6 +17,14 @@ const UserSettingsScreen = () => {
         navigation.goBack()
     }
 
+    const goForward = () => {
+        navigation.navigate('MainScreen')
+    }
+
+    const addHorse = () => {
+        navigation.navigate('SettingsScreen')
+    }
+
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -24,16 +32,17 @@ const UserSettingsScreen = () => {
                 <Icon name='chevron-back' size={30} color="#000" />
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
-            <Image source={require('../images/wawingguy.jpg')} style={{position: 'absolute', height: 100, width: 100, top:98, left:140, right:100, bottom:0}} />
-            <Text>Placeholder</Text>
             <TextInput style={styles.input} placeholder="Etunimi" />
             <TextInput style={styles.input} placeholder="Sukunimi" />
             <TextInput style={styles.input} placeholder="Vanha salasana?" />
             <TextInput style={styles.input} placeholder="Uusi salasana" secureTextEntry={true}/>
             <TextInput style={styles.input} placeholder="Vahvista uusi salasana" secureTextEntry={true}/>
-            <Pressable style={styles.buttonLogIn} >
+            <TouchableOpacity style={styles.button} onPress={goForward} >
                 <Text style={styles.text} >Päivitä tiedot</Text>
-                </Pressable>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={addHorse} >
+                <Text style={styles.text} >Lisää hevonen</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
@@ -50,8 +59,8 @@ const styles = StyleSheet.create({
     },
     IconWrapper: {
         flexDirection: 'row',
-        height: 40,
-        bottom: '25%',
+        height: 20,
+        bottom: '15%',
         right: 90,
         alignItems: 'center'
     },
@@ -82,17 +91,6 @@ const styles = StyleSheet.create({
         width: '70%',
         paddingLeft: 10
     },
-    buttonRegister: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
-        marginTop: 30,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
-    },
     text: {
         color: '#fff',
         fontWeight: 'bold'
@@ -101,4 +99,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         margin: 10
     },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#66CE26',
+        height: 35,
+        width: 220,
+        marginTop: 10,
+        borderRadius: 20,
+        borderColor: 'black',
+        borderWidth: 2
+    }
 });

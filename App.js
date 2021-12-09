@@ -7,6 +7,8 @@ import RegisterScreen from './screens/RegisterScreen';
 import PrivacyPolicyScreen from './screens/PrivacyPolicyScreen';
 import MainScreen from './screens/MainScreen';
 import ReservationScreens from './screens/ReservationScreen';
+import SettingsScreen from './screens/SettingsScreen'
+import UserSettingsScreen from './screens/UserSettingsScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,8 @@ export default function App() {
         <Stack.Screen name="PrivacyPolicyScreen" component={PrivacyPolicyScreen} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
         <Stack.Screen name="ReservationScreen" component={ReservationScreens} />
+        <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+        <Stack.Screen name="UserSettingsScreen" component={UserSettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

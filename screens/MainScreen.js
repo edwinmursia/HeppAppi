@@ -44,6 +44,10 @@ const MainScreen = () => {
         navigation.navigate('ReservationScreen')
     }
 
+    const navSettings = () => {
+        navigation.navigate('UserSettingsScreen')
+    }
+
     const saveValue = async () => {
         if (dayValue) {
             AsyncStorage.setItem('dayOne', JSON.stringify(dayValue))
@@ -65,7 +69,7 @@ const MainScreen = () => {
         <SafeAreaView style={styles.container} >
             <View style={styles.upperContainer}>
                 <Text style={styles.welcomeText} >Tervetuloa Etunimi!</Text>
-                <Icon name='ellipsis-vertical' size={20} style={{ paddingRight: 25 }} color='#fff' />
+                <Icon name='ios-settings-outline' size={20} style={{ paddingRight: 25 }} color='#fff' onPress={navSettings} />
             </View>
             <Text style={{ fontSize: 12, width: '85%', textAlign: 'center', textTransform: 'uppercase', color: 'red', paddingTop: 20 }} >
                 Varataksesi päivän paina ensin kalenterin päivästä, joka on vihreällä merkitty ja tämän jälkeen paina "Tee varaus" painikkeesta.

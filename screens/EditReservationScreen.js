@@ -12,6 +12,7 @@ const EditReservationScreen = () => {
     const isFocused = useIsFocused();
     const [time, setTime] = useState('');
     const [date, setDate] = useState('');
+    const [horse, setHorse] = useState('');
 
     const [openHorses, setOpenHorses] = useState(false);
     const [valueHorses, setValueHorses] = useState(null);
@@ -30,7 +31,7 @@ const EditReservationScreen = () => {
     ]);
 
     const goForward = async () => {
-        if (valueHorses && valueTimes) {
+        if (valueHorses, valueTimes) {
             AsyncStorage.setItem('horse', JSON.stringify(valueHorses))
             AsyncStorage.setItem('time', JSON.stringify(valueTimes))
             setValueHorses('');
@@ -39,6 +40,12 @@ const EditReservationScreen = () => {
             console.log(await AsyncStorage.getItem('time'))
             navigation.navigate('MainScreen')
         }
+    }
+
+    const deleteReservation = async () => {
+        AsyncStorage.removeItem('time')
+        AsyncStorage.removeItem('dayOne')
+        navigation.navigate('MainScreen')
     }
 
     const getAllValues = () => {
@@ -55,9 +62,16 @@ const EditReservationScreen = () => {
                 setDate(date);
             }, [isFocused])
         }
+        const getHorse = () => {
+            AsyncStorage.getItem('horse')
+            .then((horse) => {
+                setHorse(horse);
+            }, [isFocused])
+        }
 
         getTime.apply(time)
         getDate.apply(date)
+        getHorse.apply(horse)
     }
 
     return (
@@ -71,7 +85,7 @@ const EditReservationScreen = () => {
                 setOpen={setOpenHorses}
                 setValue={setValueHorses}
                 setItems={setHorses} 
-                placeholder={'Hevosen nimi'}
+                placeholder={horse.replace(/['"]+/g, '')}
                 textStyle={{color: 'grey'}}
             />
             <TextInput multiline={true} numberOfLines={6} style={styles.input} placeholder={'Lisätietoja...'} />
@@ -88,8 +102,11 @@ const EditReservationScreen = () => {
             />
             <Text style={styles.infoText} >Tekemällä varauksen vahvistan, että antamani tiedot on oikein.</Text>
             <Text style={styles.infoText} >Ymmärrän, että perumattomasta varauksesta voidaan periä maksu.</Text>
-            <TouchableOpacity onPress={goForward} style={styles.buttonRegister}>
-                <Text style={styles.text} >Muokkaa varaus</Text>
+            <TouchableOpacity onPress={goForward} style={styles.buttonModify}>
+                <Text style={styles.text} >Muokkaa varausta</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={deleteReservation} style={styles.buttonDelete}>
+                <Text style={styles.text} >Poista varaus</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
@@ -144,13 +161,24 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         paddingTop: 25
     },
-    buttonRegister: {
+    buttonModify: {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
         height: 35,
         width: 220,
         marginTop: 40,
+        borderRadius: 20,
+        borderColor: 'black',
+        borderWidth: 2
+    },
+    buttonDelete: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#66CE26',
+        height: 35,
+        width: 220,
+        marginTop: 10,
         borderRadius: 20,
         borderColor: 'black',
         borderWidth: 2

@@ -62,7 +62,7 @@ const MainScreen = () => {
     if (time && date) {
         theContent = <ReservationCard />
     } else {
-        theContent = <Text style={{ paddingTop: 5, fontSize: 16, fontWeight: '900' }} >Sinulla ei ole uusia varauksia</Text>
+        theContent = <Text style={{ paddingTop: 5, fontSize: 16, fontWeight: '900' }} >Sinulla ei ole uutta varausta</Text>
     }
 
     return (

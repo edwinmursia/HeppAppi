@@ -26,7 +26,7 @@ const ReservationScreen = () => {
     ]);
 
     const goForward = async () => {
-        if (valueHorses && valueTimes) {
+        if (valueHorses, valueTimes) {
             AsyncStorage.setItem('horse', JSON.stringify(valueHorses))
             AsyncStorage.setItem('time', JSON.stringify(valueTimes))
             setValueHorses('');

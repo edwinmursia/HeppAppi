@@ -33,8 +33,8 @@ const RegisterScreen = () => {
             <TextInput style={styles.input} placeholder="Sähköposti" />
             <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
             <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
-            <TouchableOpacity>
-                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} onPress={() => navigation.navigate('PrivacyPolicyScreen')} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
+                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>
             <View style={styles.checkboxContainer} >
                 <CheckBox

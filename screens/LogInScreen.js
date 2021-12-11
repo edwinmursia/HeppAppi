@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
+import axios from 'axios';
 
-const LogInScreen = () => {
+const LogInScreen = ({history}) => {
 
     const navigation = useNavigation()
     const goBack = () => {
@@ -14,6 +15,50 @@ const LogInScreen = () => {
         navigation.navigate('MainScreen')
     }
 
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState(false)
+    const [loading, setLoading] = useState(false)
+
+    
+    useEffect(() => {
+        const userInfo = localStorage.getItem("userInfo");
+
+        if (userInfo) {
+            history.push("/MainScreen");
+        }
+    }, [history]);
+
+    const submitHandler= async (e) => {
+        e.preventDefault();
+
+        try {
+            const config={
+                headers: {
+                    "Content-type":"application/json"
+                }
+            }
+        
+            setLoading(true)
+
+            const { data }=await axios.post(
+                '/api/users/login', 
+                {
+                email,
+                password,
+                },
+                config
+            );
+
+    console.log(data);
+    localStorage.setItem('userInfo',JSON.stringify(data));
+    setLoading(false)
+    } catch (error) {
+        setError(error.response.data.message);
+        setLoading(false)
+    }
+    };
+
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -22,9 +67,9 @@ const LogInScreen = () => {
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Image source={require('../images/horse.png')} style={{ height: 200, width: 200, marginBottom: 20, marginTop: 10 }} />
-            <TextInput style={styles.input} placeholder="Sähköposti" />
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
-            <TouchableOpacity style={styles.buttonLogIn} onPress={goForward}>
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <TouchableOpacity style={styles.buttonLogIn} onSubmit={submitHandler}>
                 <Text style={styles.text} >Kirjaudu</Text>
             </TouchableOpacity>
             <TouchableOpacity>

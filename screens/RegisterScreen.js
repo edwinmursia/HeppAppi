@@ -36,7 +36,7 @@ const RegisterScreen = () => {
             console.log(await AsyncStorage.getItem('nameInput'))
             console.log(await AsyncStorage.getItem('emailInput'))
             console.log(await AsyncStorage.getItem('passwordInput'))
-            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+            console.log(await AsyncStorage.getItem('confirmPasswordInput'))         
         }
     }
 

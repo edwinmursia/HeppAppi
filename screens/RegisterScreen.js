@@ -5,6 +5,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
     const [checked, setchecked] = useState(false);
@@ -14,12 +15,6 @@ const RegisterScreen = () => {
         navigation.goBack()
     }
 
-    const goForward = () => {
-        if (checked) {
-            //Jos kaikki kohdat on täytetty ja salasana ja vahvista salasana ovat samat ->
-            navigation.navigate('MainScreen')
-        }
-    }
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -27,6 +22,23 @@ const RegisterScreen = () => {
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const goForward = async () => {
+        if (name, email, password, confirmpassword) {
+            AsyncStorage.setItem('nameInput', name);
+            AsyncStorage.setItem('emailInput', email);
+            AsyncStorage.setItem('passwordInput', password);
+            AsyncStorage.setItem('confirmPasswordInput', confirmpassword);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+            console.log(await AsyncStorage.getItem('nameInput'))
+            console.log(await AsyncStorage.getItem('emailInput'))
+            console.log(await AsyncStorage.getItem('passwordInput'))
+            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+        }
+    }
 
     const submitHandler = async (e) => {
 
@@ -67,10 +79,10 @@ const RegisterScreen = () => {
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Text style={{fontSize: 12, width: '80%', textAlign: 'center', textTransform: 'uppercase', color: 'red'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
-            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChange={(e) => setName(e.target.value)} />
-            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChangeText={(data) => setName(data)} />
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(data) => setEmail(data)} />
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(data) => setPassword(data)}/>
+            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChangeText={(data) => setConfirmPassword(data)} />
             <TouchableOpacity>
                 <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} onPress={() => navigation.navigate('PrivacyPolicyScreen')} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>
@@ -84,7 +96,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={submitHandler}>
+            <TouchableOpacity onPress={goForward}>
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>

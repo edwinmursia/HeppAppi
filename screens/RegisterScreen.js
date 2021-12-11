@@ -25,10 +25,14 @@ const RegisterScreen = () => {
 
     const goForward = async () => {
         if (name, email, password, confirmpassword) {
-            AsyncStorage.setItem('nameInput', name);
-            AsyncStorage.setItem('emailInput', email);
-            AsyncStorage.setItem('passwordInput', password);
-            AsyncStorage.setItem('confirmPasswordInput', confirmpassword);
+            const nameString = JSON.stringify(name)
+            const emailString = JSON.stringify(email)
+            const passwordString = JSON.stringify(password)
+            const confirmPasswordString = JSON.stringify(confirmpassword)
+            AsyncStorage.setItem('nameInput', nameString);
+            AsyncStorage.setItem('emailInput', emailString);
+            AsyncStorage.setItem('passwordInput', passwordString);
+            AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
             setName('');
             setEmail('');
             setPassword('');
@@ -36,7 +40,8 @@ const RegisterScreen = () => {
             console.log(await AsyncStorage.getItem('nameInput'))
             console.log(await AsyncStorage.getItem('emailInput'))
             console.log(await AsyncStorage.getItem('passwordInput'))
-            console.log(await AsyncStorage.getItem('confirmPasswordInput'))         
+            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+            submitHandler();
         }
     }
 
@@ -57,12 +62,11 @@ const RegisterScreen = () => {
 
                 const { data } = await axios.post(
                     "/api/users",
-                    {name, email, password },
+                    {name, email, password},
                     config
                 );
 
                 setLoading(false);
-                localStorage.setItem("userInfo", JSON.stringify(data));
             } catch (error) {
                 setError(error.response.data.message);
             }

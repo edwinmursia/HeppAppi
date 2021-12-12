@@ -22,13 +22,12 @@ const RegisterScreen = () => {
     const handleSubmit = () => {
         const information = {name, email, password}
         
-        fetch('http:localhost:5000/api/users', {
+        fetch('http://localhost:5000/api/users', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify()
+            body: JSON.stringify(information)
         }).then(() => {
             console.log('New account added')
-            navigation.navigate('MainScreen')
         })
     }
 

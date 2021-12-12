@@ -11,7 +11,7 @@ export default function StartingScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.textWelcome}>Tervetuloa HeppAppiin</Text>
-      <Image source={require('../images/horse.png')} style={{height: 250, width: 250, marginBottom: 10, marginTop: 10}} />
+      <Image source={require('../images/horse.png')} style={{height: 240, width: 240, marginBottom: 10, marginTop: 10}} />
       <TouchableOpacity onPress={() => navigation.navigate("LogInScreen")} >
         <Pressable style={styles.buttonLogIn} >
           <Text style={styles.text} >Kirjaudu Sisään</Text>
@@ -37,37 +37,38 @@ const styles = StyleSheet.create({
   },
   textWelcome: {
     fontWeight: 'bold',
-    fontSize: 24,
-    marginBottom: 10
+    fontSize: 28,
+    marginBottom: 20
   },
   buttonLogIn: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#66CE26',
-    height: 35,
-    width: 220,
-    marginTop: 15,
-    borderRadius: 20,
-    borderColor: 'black',
-    borderWidth: 2
+    height: 45,
+    width: 230,
+    marginTop: 20,
+    borderRadius: 10,
+    borderWidth: 0
   },
   buttonSignIn: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    height: 35,
-    width: 220,
+    height: 45,
+    width: 230,
     marginTop: 10,
-    borderRadius: 20,
-    borderColor: 'black',
-    borderWidth: 2
+    borderRadius: 10,
+    borderColor: 'grey',
+    borderWidth: 1
   },
   text: {
     color: '#fff',
+    fontSize: 15,
     fontWeight: 'bold'
   },
   textSignIn: {
     color: '#000',
+    fontSize: 15,
     fontWeight: 'bold'
   }
 });

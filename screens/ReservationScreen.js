@@ -82,9 +82,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     input: {
-        height: 200,
+        height: 150,
         margin: 10,
-        borderWidth: 2,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '85%',
         paddingLeft: 10,
@@ -94,7 +95,8 @@ const styles = StyleSheet.create({
     dropDownHorses: {
         width: '85%',
         left: '32%',
-        borderWidth: 2,
+        borderColor: 'grey',
+        borderWidth: 1,
         zIndex: 1,
         ...Platform.select({
             android: {
@@ -112,12 +114,13 @@ const styles = StyleSheet.create({
         left: '45%',
         top: '1%',
         marginBottom: 10,
-        borderWidth: 2
+        borderColor: 'grey',
+        borderWidth: 1
     },
     infoText: {
         width: '80%',
         maxWidth: '80%',
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: '900',
         paddingTop: 25
     },
@@ -125,12 +128,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
+        height: 45,
+        width: 230,
         marginTop: 40,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 0
     },
     text: {
         color: '#fff',

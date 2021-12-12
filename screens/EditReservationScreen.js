@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
     },
     input: {
-        height: 200,
+        height: 150,
         margin: 10,
         borderColor: 'grey',
         borderWidth: 1,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     infoText: {
         width: '80%',
         maxWidth: '80%',
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: '900',
         paddingTop: 25
     },
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         height: 45,
         width: 230,
         marginTop: 40,
-        borderRadius: 20,
+        borderRadius: 10,
         borderWidth: 0
     },
     buttonDelete: {
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         height: 45,
         width: 230,
         marginTop: 10,
-        borderRadius: 20,
+        borderRadius: 10,
         borderWidth: 0
     },
     text: {

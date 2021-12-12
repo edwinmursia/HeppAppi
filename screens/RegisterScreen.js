@@ -4,7 +4,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
@@ -19,9 +18,19 @@ const RegisterScreen = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmpassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState(null);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = () => {
+        const information = {name, email, password}
+        
+        fetch('http:localhost:5000/api/users', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify()
+        }).then(() => {
+            console.log('New account added')
+            navigation.navigate('MainScreen')
+        })
+    }
 
     const goForward = async () => {
         if (name, email, password, confirmpassword) {
@@ -41,39 +50,8 @@ const RegisterScreen = () => {
             console.log(await AsyncStorage.getItem('emailInput'))
             console.log(await AsyncStorage.getItem('passwordInput'))
             console.log(await AsyncStorage.getItem('confirmPasswordInput'))
-            submitHandler
         }
     }
-
-    const submitHandler = async (e) => {
-
-        if(password !==confirmpassword) {
-            setMessage('Passwords do not match')
-        } else  {
-            setMessage(null)
-            try {
-                const config = {
-                    headers: {
-                        "Content-type": "application/json",
-                    },
-                };
-
-                setLoading(true);
-
-                const { data } = await axios.post(
-                    "/api/users",
-                    {name, email, password},
-                    config
-                );
-
-                setLoading(false);
-            } catch (error) {
-                setError(error.response.data.message);
-            }
-        }
-
-        console.log(email);
-    };
 
     return (
         <SafeAreaView style={styles.container} >
@@ -100,7 +78,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={goForward}>
+            <TouchableOpacity onPress={handleSubmit} >
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>

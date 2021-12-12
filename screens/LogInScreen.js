@@ -4,7 +4,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import axios from 'axios';
 
-const LogInScreen = ({history}) => {
+const LogInScreen = () => {
 
     const navigation = useNavigation()
     const goBack = () => {
@@ -17,47 +17,6 @@ const LogInScreen = ({history}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
-
-    
-    useEffect(() => {
-        const userInfo = localStorage.getItem("userInfo");
-
-        if (userInfo) {
-            history.push("/MainScreen");
-        }
-    }, [history]);
-
-    const submitHandler= async (e) => {
-        e.preventDefault();
-
-        try {
-            const config={
-                headers: {
-                    "Content-type":"application/json"
-                }
-            }
-        
-            setLoading(true)
-
-            const { data }=await axios.post(
-                '/api/users/login', 
-                {
-                email,
-                password,
-                },
-                config
-            );
-
-    console.log(data);
-    localStorage.setItem('userInfo',JSON.stringify(data));
-    setLoading(false)
-    } catch (error) {
-        setError(error.response.data.message);
-        setLoading(false)
-    }
-    };
 
     return (
         <SafeAreaView style={styles.container} >

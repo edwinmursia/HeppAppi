@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
     const [checked, setchecked] = useState(false);
@@ -13,12 +15,65 @@ const RegisterScreen = () => {
         navigation.goBack()
     }
 
-    const goForward = () => {
-        if (checked) {
-            //Jos kaikki kohdat on täytetty ja salasana ja vahvista salasana ovat samat ->
-            navigation.navigate('MainScreen')
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
+    const [message, setMessage] = useState(null);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const goForward = async () => {
+        if (name, email, password, confirmpassword) {
+            const nameString = JSON.stringify(name)
+            const emailString = JSON.stringify(email)
+            const passwordString = JSON.stringify(password)
+            const confirmPasswordString = JSON.stringify(confirmpassword)
+            AsyncStorage.setItem('nameInput', nameString);
+            AsyncStorage.setItem('emailInput', emailString);
+            AsyncStorage.setItem('passwordInput', passwordString);
+            AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+            console.log(await AsyncStorage.getItem('nameInput'))
+            console.log(await AsyncStorage.getItem('emailInput'))
+            console.log(await AsyncStorage.getItem('passwordInput'))
+            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+            submitHandler();
         }
     }
+
+    const submitHandler = async (e) => {
+
+        if(password !==confirmpassword) {
+            setMessage('Passwords do not match')
+        } else  {
+            setMessage(null)
+            try {
+                const config = {
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                };
+
+                setLoading(true);
+
+                const { data } = await axios.post(
+                    "/api/users",
+                    {name, email, password},
+                    config
+                );
+
+                setLoading(false);
+            } catch (error) {
+                setError(error.response.data.message);
+            }
+        }
+
+        console.log(email);
+    };
 
     return (
         <SafeAreaView style={styles.container} >
@@ -28,11 +83,10 @@ const RegisterScreen = () => {
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Text style={{fontSize: 12, width: '80%', textAlign: 'center', textTransform: 'uppercase', color: 'red'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
-            <TextInput style={styles.input} placeholder="Etunimi" />
-            <TextInput style={styles.input} placeholder="Sukunimi" />
-            <TextInput style={styles.input} placeholder="Sähköposti" />
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
-            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
+            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChangeText={(data) => setName(data)} />
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(data) => setEmail(data)} />
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(data) => setPassword(data)}/>
+            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChangeText={(data) => setConfirmPassword(data)} />
             <TouchableOpacity>
                 <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} onPress={() => navigation.navigate('PrivacyPolicyScreen')} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>

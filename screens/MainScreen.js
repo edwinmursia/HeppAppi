@@ -89,11 +89,20 @@ const MainScreen = () => {
                 onDayPress={(dayValue) => setDayValue(dayValue.dateString)}
                 // Dates that the teacher marks in the calendar.
                 markedDates={{
-                    '2021-12-16': { selectedColor: 'green', selected: true },
-                    '2021-12-19': { selectedColor: 'green', selected: true },
-                    '2021-12-29': { selectedColor: 'green', selected: true },
-                    '2021-12-30': { selectedColor: 'green', selected: true }
+                    '2021-12-16': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-19': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-20': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-21': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-22': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-23': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-26': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-27': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-28': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-29': { selectedColor: 'green', selected: true, disabled: false },
+                    '2021-12-30': { selectedColor: 'green', selected: true, disabled: false }
                 }}
+                disabledByDefault={true}
+                disableAllTouchEventsForDisabledDays={true}
                 theme={{
                     arrowColor: '#518B35',
                     todayTextColor: '#518B35',

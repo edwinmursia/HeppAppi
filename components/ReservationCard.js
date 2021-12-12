@@ -65,8 +65,11 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
         backgroundColor: '#eeeeee',
         flexDirection: 'row',
+        borderColor: '#eeeeee',
         borderWidth: 1,
-        marginTop: 5
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        marginTop: 20
     },
     calendarLogoWrapper: {
         flexDirection: 'column',

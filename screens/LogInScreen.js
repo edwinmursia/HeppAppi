@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        margin: 10,
-        borderWidth: 2,
+        marginTop: 10,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '70%',
         paddingLeft: 10
@@ -63,20 +64,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
-        marginTop: 15,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        height: 45,
+        width: 230,
+        marginTop: 20,
+        borderRadius: 10,
+        borderWidth: 0
     },
     text: {
         color: '#fff',
+        fontSize: 15,
         fontWeight: 'bold'
     },
     passwordText: {
         fontWeight: 'bold',
-        margin: 10
+        margin: 15
     }
 });
 

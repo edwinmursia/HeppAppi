@@ -59,16 +59,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#0b6122',
         height: 45,
-        width: 240,
+        width: 230,
         marginTop: 5,
         borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderWidth: 0
     },
     input: {
         height: 50,
         margin: 6,
-        borderWidth: 2,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '70%',
         paddingLeft: 10
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
     input1: {
         height: 250,
         margin: 6,
-        borderWidth: 2,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '70%',
         paddingLeft: 10
@@ -85,12 +86,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
+        height: 45,
+        width: 230,
         marginTop: 30,
         borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderWidth: 0
     },
     text: {
         color: '#fff',

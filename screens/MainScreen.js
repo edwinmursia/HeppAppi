@@ -71,8 +71,8 @@ const MainScreen = () => {
                 <Text style={styles.welcomeText} >Tervetuloa Etunimi!</Text>
                 <Icon name='ios-settings-outline' size={20} style={{ paddingRight: 25 }} color='#fff' onPress={navSettings} />
             </View>
-            <Text style={{ fontSize: 12, width: '85%', textAlign: 'center', textTransform: 'uppercase', color: 'red', paddingTop: 20 }} >
-                Varataksesi päivän paina ensin kalenterin päivästä, joka on vihreällä merkitty ja tämän jälkeen paina "Tee varaus" painikkeesta.
+            <Text style={{ fontSize: 11, width: '90%', textAlign: 'center', textTransform: 'none', color: 'grey', paddingTop: 20, paddingBottom: 10 }} >
+                Aloita valitsemalla vihreällä merkitty päivä, ja varaa itsellesi sopiva aika.
             </Text>
             <Calendar
                 enableSwipeMonths={true}
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         ...Platform.select({
             android: {
-                marginTop: '8%'
+                marginTop: '7%'
             }
         })
     },
@@ -153,12 +153,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
+        height: 45,
+        width: 230,
         marginTop: 15,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 0
     },
     text: {
         color: '#fff',

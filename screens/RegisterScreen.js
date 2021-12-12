@@ -27,14 +27,14 @@ const RegisterScreen = () => {
                 <Icon name='chevron-back' size={30} color="#000" />
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
-            <Text style={{fontSize: 12, width: '80%', textAlign: 'center', textTransform: 'uppercase', color: 'red'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
+            <Text style={{fontSize: 11, width: '80%', textAlign: 'center', textTransform: 'none', color: 'grey'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
             <TextInput style={styles.input} placeholder="Etunimi" />
             <TextInput style={styles.input} placeholder="Sukunimi" />
             <TextInput style={styles.input} placeholder="Sähköposti" />
             <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
             <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
             <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
-                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
+                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 15, paddingLeft: '19%'}} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>
             <View style={styles.checkboxContainer} >
                 <CheckBox
@@ -74,8 +74,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        margin: 10,
-        borderWidth: 2,
+        marginTop: 10,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '70%',
         paddingLeft: 10
@@ -84,12 +85,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
+        height: 45,
+        width: 230,
         marginTop: 30,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 0
     },
     text: {
         color: '#fff',

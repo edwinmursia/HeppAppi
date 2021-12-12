@@ -23,22 +23,32 @@ const MainScreen = () => {
     const isFocused = useIsFocused();
     const [time, setTime] = useState('');
     const [date, setDate] = useState('')
+    const [name, setName] = useState('')
 
-    const getTime = () => {
-        AsyncStorage.getItem('time')
-            .then((time) => {
-                setTime(time);
-            }, [isFocused])
-    }
-    const getDate = () => {
-        AsyncStorage.getItem('dayOne')
-            .then((date) => {
-                setDate(date);
-            }, [isFocused])
-    }
+    const getAllValues = () => {
+        const getTime = () => {
+            AsyncStorage.getItem('time')
+                .then((time) => {
+                    setTime(time);
+                }, [isFocused])
+        }
+        const getDate = () => {
+            AsyncStorage.getItem('dayOne')
+                .then((date) => {
+                    setDate(date);
+                }, [isFocused])
+        }
+        const getName = () => {
+            AsyncStorage.getItem('nameInput')
+                .then((name) => {
+                    setName(name);
+                }, [isFocused])
+        }
 
-    getTime.apply(time)
-    getDate.apply(date)
+        getTime.apply(time)
+        getDate.apply(date)
+        getName.apply(name)
+    }
 
     const navFunction = () => {
         navigation.navigate('ReservationScreen')
@@ -66,9 +76,9 @@ const MainScreen = () => {
     }
 
     return (
-        <SafeAreaView style={styles.container} >
+        <SafeAreaView style={styles.container} onLayout={getAllValues} >
             <View style={styles.upperContainer}>
-                <Text style={styles.welcomeText} >Tervetuloa Etunimi!</Text>
+                <Text style={styles.welcomeText} >Tervetuloa {name.replace(/['"]+/g, '')}!</Text>
                 <Icon name='ios-settings-outline' size={20} style={{ paddingRight: 25 }} color='#fff' onPress={navSettings} />
             </View>
             <Text style={{ fontSize: 12, width: '85%', textAlign: 'center', textTransform: 'uppercase', color: 'red', paddingTop: 20 }} >

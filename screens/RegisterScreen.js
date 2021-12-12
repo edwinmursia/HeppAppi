@@ -22,12 +22,13 @@ const RegisterScreen = () => {
     const handleSubmit = () => {
         const information = {name, email, password}
         
-        fetch('http://localhost:5000/api/users', {
+        fetch('http://192.168.0.12:5000/api/users', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(information)
         }).then(() => {
             console.log('New account added')
+            navigation.navigate('MainScreen')
         })
     }
 
@@ -49,6 +50,7 @@ const RegisterScreen = () => {
             console.log(await AsyncStorage.getItem('emailInput'))
             console.log(await AsyncStorage.getItem('passwordInput'))
             console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+            navigation.navigate('MainScreen')
         }
     }
 
@@ -77,7 +79,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={handleSubmit} >
+            <TouchableOpacity onPress={goForward} >
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>

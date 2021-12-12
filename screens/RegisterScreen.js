@@ -4,18 +4,39 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
     const [checked, setchecked] = useState(false);
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
+
 
     const navigation = useNavigation()
     const goBack = () => {
         navigation.goBack()
     }
 
-    const goForward = () => {
-        if (checked) {
-            //Jos kaikki kohdat on täytetty ja salasana ja vahvista salasana ovat samat ->
+    const goForward = async () => {
+        if (checked, email, name, password, confirmpassword) {
+            const nameString = JSON.stringify(name)
+            const emailString = JSON.stringify(email)
+            const passwordString = JSON.stringify(password)
+            const confirmPasswordString = JSON.stringify(confirmpassword)
+            AsyncStorage.setItem('nameInput', nameString);
+            AsyncStorage.setItem('emailInput', emailString);
+            AsyncStorage.setItem('passwordInput', passwordString);
+            AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
+            setName('');
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+            console.log(await AsyncStorage.getItem('nameInput'))
+            console.log(await AsyncStorage.getItem('emailInput'))
+            console.log(await AsyncStorage.getItem('passwordInput'))
+            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
             navigation.navigate('MainScreen')
         }
     }
@@ -28,11 +49,10 @@ const RegisterScreen = () => {
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Text style={{fontSize: 11, width: '80%', textAlign: 'center', textTransform: 'none', color: 'grey'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
-            <TextInput style={styles.input} placeholder="Etunimi" />
-            <TextInput style={styles.input} placeholder="Sukunimi" />
-            <TextInput style={styles.input} placeholder="Sähköposti" />
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} />
-            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} />
+            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChangeText={(data) => setName(data)} />
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(data) => setEmail(data)} />
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(data) => setPassword(data)}/>
+            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChangeText={(data) => setConfirmPassword(data)} />
             <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
                 <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 15, paddingLeft: '19%'}} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>

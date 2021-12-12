@@ -22,33 +22,31 @@ const MainScreen = () => {
 
     const isFocused = useIsFocused();
     const [time, setTime] = useState('');
-    const [date, setDate] = useState('');
-    const [name, setName] = useState('');
+    const [date, setDate] = useState('')
+    const [name, setName] = useState('')
 
-    const getAllValues = () => {
-        const getTime = () => {
-            AsyncStorage.getItem('time')
-                .then((time) => {
-                    setTime(time);
-                }, [isFocused])
-        }
-        const getDate = () => {
-            AsyncStorage.getItem('dayOne')
-                .then((date) => {
-                    setDate(date);
-                }, [isFocused])
-        }
-        const getName = () => {
-            AsyncStorage.getItem('nameInput')
-                .then((name) => {
-                    setName(name);
-                }, [isFocused])
-        }
-
-        getTime.apply(time)
-        getDate.apply(date)
-        getName.apply(name)
+    const getTime = () => {
+        AsyncStorage.getItem('time')
+            .then((time) => {
+                setTime(time);
+            }, [isFocused])
     }
+    const getDate = () => {
+        AsyncStorage.getItem('dayOne')
+            .then((date) => {
+                setDate(date);
+            }, [isFocused])
+    }
+    const getName = () => {
+        AsyncStorage.getItem('nameInput')
+            .then((name) => {
+                setName(name);
+            }, [isFocused])
+    }
+
+    getTime.apply(time)
+    getDate.apply(date)
+    getName.apply(name)
 
     const navFunction = () => {
         navigation.navigate('ReservationScreen')
@@ -72,17 +70,17 @@ const MainScreen = () => {
     if (time && date) {
         theContent = <ReservationCard />
     } else {
-        theContent = <Text style={{ paddingTop: 5, fontSize: 16, fontWeight: '900' }} >Sinulla ei ole uutta varausta</Text>
+        theContent = <Text style={{ paddingTop: 5, fontSize: 16, fontWeight: '900' }} >Sinulla ei ole uusia varauksia</Text>
     }
 
     return (
-        <SafeAreaView style={styles.container} onLayout={getAllValues} >
+        <SafeAreaView style={styles.container} >
             <View style={styles.upperContainer}>
                 <Text style={styles.welcomeText} >Tervetuloa {name.replace(/['"]+/g, '')}!</Text>
                 <Icon name='ios-settings-outline' size={20} style={{ paddingRight: 25 }} color='#fff' onPress={navSettings} />
             </View>
-            <Text style={{ fontSize: 11, width: '90%', textAlign: 'center', textTransform: 'none', color: 'grey', paddingTop: 20, paddingBottom: 10 }} >
-                Aloita valitsemalla vihreällä merkitty päivä, ja varaa itsellesi sopiva aika.
+            <Text style={{ fontSize: 12, width: '85%', textAlign: 'center', textTransform: 'uppercase', color: 'red', paddingTop: 20 }} >
+                Varataksesi päivän paina ensin kalenterin päivästä, joka on vihreällä merkitty ja tämän jälkeen paina "Tee varaus" painikkeesta.
             </Text>
             <Calendar
                 enableSwipeMonths={true}
@@ -91,20 +89,11 @@ const MainScreen = () => {
                 onDayPress={(dayValue) => setDayValue(dayValue.dateString)}
                 // Dates that the teacher marks in the calendar.
                 markedDates={{
-                    '2021-12-16': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-19': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-20': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-21': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-22': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-23': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-26': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-27': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-28': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-29': { selectedColor: 'green', selected: true, disabled: false },
-                    '2021-12-30': { selectedColor: 'green', selected: true, disabled: false }
+                    '2021-12-16': { selectedColor: 'green', selected: true },
+                    '2021-12-19': { selectedColor: 'green', selected: true },
+                    '2021-12-29': { selectedColor: 'green', selected: true },
+                    '2021-12-30': { selectedColor: 'green', selected: true }
                 }}
-                disabledByDefault={true}
-                disableAllTouchEventsForDisabledDays={true}
                 theme={{
                     arrowColor: '#518B35',
                     todayTextColor: '#518B35',
@@ -143,7 +132,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         ...Platform.select({
             android: {
-                marginTop: '7%'
+                marginTop: '8%'
             }
         })
     },
@@ -163,11 +152,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 45,
-        width: 230,
+        height: 35,
+        width: 220,
         marginTop: 15,
-        borderRadius: 10,
-        borderWidth: 0
+        borderRadius: 20,
+        borderColor: 'black',
+        borderWidth: 2
     },
     text: {
         color: '#fff',

@@ -4,7 +4,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { CheckBox } from 'react-native-elements'
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
@@ -19,9 +18,26 @@ const RegisterScreen = () => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmpassword, setConfirmPassword] = useState("");
+<<<<<<< HEAD
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(false);
     
+=======
+
+    const handleSubmit = () => {
+        const information = {name, email, password}
+        
+        fetch('http://192.168.0.12:5000/api/users', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(information)
+        }).then(() => {
+            console.log('New account added')
+            navigation.navigate('MainScreen')
+        })
+    }
+
+>>>>>>> bbc0038e2b7a24345f4454afc9d5818f1c14b846
     const goForward = async () => {
         if (name, email, password, confirmpassword) {
             const nameString = JSON.stringify(name)
@@ -40,10 +56,11 @@ const RegisterScreen = () => {
             console.log(await AsyncStorage.getItem('emailInput'))
             console.log(await AsyncStorage.getItem('passwordInput'))
             console.log(await AsyncStorage.getItem('confirmPasswordInput'))
-            submitHandler();
+            navigation.navigate('MainScreen')
         }
     }
 
+<<<<<<< HEAD
     const submitHandler = async () => {
 
         if(password !==confirmpassword) {
@@ -72,6 +89,8 @@ const RegisterScreen = () => {
         console.log(email);
     };
 
+=======
+>>>>>>> bbc0038e2b7a24345f4454afc9d5818f1c14b846
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -97,7 +116,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={goForward}>
+            <TouchableOpacity onPress={goForward} >
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>

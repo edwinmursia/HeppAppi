@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users',userRoutes) ;
 
+const hostname = '192.168.0.12';
 const PORT = process.env.PORT
 
-app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
+app.listen(PORT, hostname, console.log(`Server running at http://${hostname}:${PORT}/`));

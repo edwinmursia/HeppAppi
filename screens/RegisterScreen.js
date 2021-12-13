@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
@@ -19,8 +19,21 @@ const RegisterScreen = () => {
         navigation.goBack()
     }
 
+    const handleSubmit = () => {
+        const information = {name, email, password}
+        // Replace "192.168.0.12" with your own ip-address.
+        fetch('http://192.168.0.12:5000/api/users', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(information)
+        }).then(() => {
+            console.log('New account added')
+            navigation.navigate('MainScreen')
+        })
+    }
+
     const goForward = async () => {
-        if (checked, email, name, password, confirmpassword) {
+        if (name, email, password, confirmpassword) {
             const nameString = JSON.stringify(name)
             const emailString = JSON.stringify(email)
             const passwordString = JSON.stringify(password)
@@ -66,7 +79,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={goForward}>
+            <TouchableOpacity onPress={handleSubmit} >
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>

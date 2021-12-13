@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Image, TextInput, Pressable, Text, View, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -19,7 +19,7 @@ const RegisterScreen = () => {
         navigation.goBack()
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const information = {name, email, password}
         // Replace "192.168.0.12" with your own ip-address.
         fetch('http://192.168.0.12:5000/api/users', {
@@ -27,8 +27,23 @@ const RegisterScreen = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(information)
         }).then(() => {
-            console.log('New account added')
-            navigation.navigate('MainScreen')
+            if (name, email, password, confirmpassword) {
+                if (password == confirmpassword) {
+                    if (checked) {
+                        console.log('New account added')
+                        const nameString = JSON.stringify(name)
+                        AsyncStorage.setItem('nameInput', nameString);
+                        setName('');
+                        navigation.navigate('MainScreen')
+                    } else {
+                        Alert.alert('HUOM!', 'Sinun pitää hyväksyä tietosuojaseloste ja käyttöehdot jatkaaksesi!')
+                    }
+                } else {
+                    Alert.alert('HUOM!', 'Salasanojen pitää täsmää!')
+                }
+            } else {
+                Alert.alert('HUOM!', 'Täytä kaikki kentät!')
+            }
         })
     }
 

@@ -28,18 +28,22 @@ const RegisterScreen = () => {
             body: JSON.stringify(information)
         }).then(() => {
             if (name, email, password, confirmpassword) {
-                if (password == confirmpassword) {
-                    if (checked) {
-                        console.log('New account added')
-                        const nameString = JSON.stringify(name)
-                        AsyncStorage.setItem('nameInput', nameString);
-                        setName('');
-                        navigation.navigate('MainScreen')
+                if (email.search('@') !== -1) {
+                    if (password == confirmpassword) {
+                        if (checked) {
+                            console.log('New account added')
+                            const nameString = JSON.stringify(name)
+                            AsyncStorage.setItem('nameInput', nameString);
+                            setName('');
+                            navigation.navigate('MainScreen')
+                        } else {
+                            Alert.alert('HUOM!', 'Sinun pitää hyväksyä tietosuojaseloste ja käyttöehdot jatkaaksesi!')
+                        }
                     } else {
-                        Alert.alert('HUOM!', 'Sinun pitää hyväksyä tietosuojaseloste ja käyttöehdot jatkaaksesi!')
+                        Alert.alert('HUOM!', 'Salasanojen pitää täsmää!')
                     }
                 } else {
-                    Alert.alert('HUOM!', 'Salasanojen pitää täsmää!')
+                    Alert.alert('HUOM!', 'Sähköposti on virheellinen!')
                 }
             } else {
                 Alert.alert('HUOM!', 'Täytä kaikki kentät!')

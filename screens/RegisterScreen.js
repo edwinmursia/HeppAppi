@@ -8,26 +8,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegisterScreen = () => {
     const [checked, setchecked] = useState(false);
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmpassword, setConfirmPassword] = useState("");
+
 
     const navigation = useNavigation()
     const goBack = () => {
         navigation.goBack()
     }
 
-    const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmpassword, setConfirmPassword] = useState("");
-<<<<<<< HEAD
-    const [message, setMessage] = useState(null);
-    const [error, setError] = useState(false);
-    
-=======
-
     const handleSubmit = () => {
         const information = {name, email, password}
-        
-        fetch('http://192.168.0.12:5000/api/users', {
+        // Replace "192.168.0.12" with your own ip-address.
+        fetch('http://192.168.0.107:5000/api/users', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(information)
@@ -37,60 +32,28 @@ const RegisterScreen = () => {
         })
     }
 
->>>>>>> bbc0038e2b7a24345f4454afc9d5818f1c14b846
-    const goForward = async () => {
-        if (name, email, password, confirmpassword) {
-            const nameString = JSON.stringify(name)
-            const emailString = JSON.stringify(email)
-            const passwordString = JSON.stringify(password)
-            const confirmPasswordString = JSON.stringify(confirmpassword)
-            AsyncStorage.setItem('nameInput', nameString);
-            AsyncStorage.setItem('emailInput', emailString);
-            AsyncStorage.setItem('passwordInput', passwordString);
-            AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-            console.log(await AsyncStorage.getItem('nameInput'))
-            console.log(await AsyncStorage.getItem('emailInput'))
-            console.log(await AsyncStorage.getItem('passwordInput'))
-            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
-            navigation.navigate('MainScreen')
-        }
-    }
+    //const goForward = async () => {
+     //   if (name, email, password, confirmpassword) {
+      //      const nameString = JSON.stringify(name)
+      //      const emailString = JSON.stringify(email)
+      //      const passwordString = JSON.stringify(password)
+       //     const confirmPasswordString = JSON.stringify(confirmpassword)
+        //    AsyncStorage.setItem('nameInput', nameString);
+         //   AsyncStorage.setItem('emailInput', emailString);
+         //   AsyncStorage.setItem('passwordInput', passwordString);
+        //    AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
+        //    setName('');
+        //    setEmail('');
+        //    setPassword('');
+        //    setConfirmPassword('');
+        //    console.log(await AsyncStorage.getItem('nameInput'))
+         //   console.log(await AsyncStorage.getItem('emailInput'))
+        //    console.log(await AsyncStorage.getItem('passwordInput'))
+        //    console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+        //    navigation.navigate('MainScreen')
+      //  }
+   // }
 
-<<<<<<< HEAD
-    const submitHandler = async () => {
-
-        if(password !==confirmpassword) {
-            setMessage('Passwords do not match')
-        } else  {
-            setMessage(null)
-            try {
-                const config = {
-                    headers: {
-                        "Content-type": "application/json",
-                    },
-                };
-
-                await axios.post(
-                    "/api/users",
-                    {name:(name),
-                    email:(email),
-                    password:(password)},
-                    config
-                );
-            } catch (error) {
-                setError(error.response.message);
-            }
-        }
-
-        console.log(email);
-    };
-
-=======
->>>>>>> bbc0038e2b7a24345f4454afc9d5818f1c14b846
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -98,13 +61,13 @@ const RegisterScreen = () => {
                 <Icon name='chevron-back' size={30} color="#000" />
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
-            <Text style={{fontSize: 12, width: '80%', textAlign: 'center', textTransform: 'uppercase', color: 'red'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
-            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChangeText={(TextInput) => setName(TextInput)} />
-            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(TextInput) => setEmail(TextInput)} />
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(TextInput) => setPassword(TextInput)}/>
-            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChangeText={(TextInput) => setConfirmPassword(TextInput)} />
-            <TouchableOpacity>
-                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 5, paddingLeft: '19%'}} onPress={() => navigation.navigate('PrivacyPolicyScreen')} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
+            <Text style={{fontSize: 11, width: '80%', textAlign: 'center', textTransform: 'none', color: 'grey'}}>Täytä kaikki kentät rekisteröityäksesi!</Text>
+            <TextInput style={styles.input} placeholder="Etunimi ja Sukunimi" type="name" value={name} onChangeText={(data) => setName(data)} />
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(data) => setEmail(data)} />
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(data) => setPassword(data)}/>
+            <TextInput style={styles.input} placeholder="Vahvista salasana" secureTextEntry={true} type="confirmPassword" value={confirmpassword} onChangeText={(data) => setConfirmPassword(data)} />
+            <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicyScreen')}>
+                <Text style={{fontSize: 12, width: '80%', textAlign: 'center', paddingTop: 15, paddingLeft: '19%'}} >Paina avataksesi tietosuojaseloste ja käyttöehdot</Text>
             </TouchableOpacity>
             <View style={styles.checkboxContainer} >
                 <CheckBox
@@ -116,7 +79,7 @@ const RegisterScreen = () => {
                     onPress={() => setchecked(!checked)}
                 />
             </View>
-            <TouchableOpacity onPress={goForward} >
+            <TouchableOpacity onPress={handleSubmit} >
                 <Pressable style={styles.buttonRegister}>
                     <Text style={styles.text} >Rekisteröidy</Text>
                 </Pressable>
@@ -144,8 +107,9 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        margin: 10,
-        borderWidth: 2,
+        marginTop: 10,
+        borderColor: 'grey',
+        borderWidth: 1,
         borderRadius: 10,
         width: '70%',
         paddingLeft: 10
@@ -154,12 +118,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#66CE26',
-        height: 35,
-        width: 220,
+        height: 45,
+        width: 230,
         marginTop: 30,
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2
+        borderRadius: 10,
+        borderWidth: 0
     },
     text: {
         color: '#fff',

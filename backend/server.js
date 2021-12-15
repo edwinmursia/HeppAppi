@@ -17,8 +17,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users',userRoutes) ;
 
-// Replace "192.168.0.12" with your own ip-address.
-const hostname = '192.168.0.12';
+const hostname = '192.168.0.107';
 const PORT = process.env.PORT
 
 app.listen(PORT, hostname, console.log(`Server running at http://${hostname}:${PORT}/`));

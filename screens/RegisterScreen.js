@@ -19,10 +19,10 @@ const RegisterScreen = () => {
         navigation.goBack()
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         const information = {name, email, password}
         // Replace "192.168.0.12" with your own ip-address.
-        fetch('http://192.168.0.12:5000/api/users', {
+        fetch('http://192.168.0.107:5000/api/users', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(information)
@@ -51,27 +51,27 @@ const RegisterScreen = () => {
         })
     }
 
-    const goForward = async () => {
-        if (name, email, password, confirmpassword) {
-            const nameString = JSON.stringify(name)
-            const emailString = JSON.stringify(email)
-            const passwordString = JSON.stringify(password)
-            const confirmPasswordString = JSON.stringify(confirmpassword)
-            AsyncStorage.setItem('nameInput', nameString);
-            AsyncStorage.setItem('emailInput', emailString);
-            AsyncStorage.setItem('passwordInput', passwordString);
-            AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
-            setName('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-            console.log(await AsyncStorage.getItem('nameInput'))
-            console.log(await AsyncStorage.getItem('emailInput'))
-            console.log(await AsyncStorage.getItem('passwordInput'))
-            console.log(await AsyncStorage.getItem('confirmPasswordInput'))
-            navigation.navigate('MainScreen')
-        }
-    }
+    //const goForward = async () => {
+     //   if (name, email, password, confirmpassword) {
+      //      const nameString = JSON.stringify(name)
+      //      const emailString = JSON.stringify(email)
+      //      const passwordString = JSON.stringify(password)
+       //     const confirmPasswordString = JSON.stringify(confirmpassword)
+        //    AsyncStorage.setItem('nameInput', nameString);
+         //   AsyncStorage.setItem('emailInput', emailString);
+         //   AsyncStorage.setItem('passwordInput', passwordString);
+        //    AsyncStorage.setItem('confirmPasswordInput', confirmPasswordString);
+        //    setName('');
+        //    setEmail('');
+        //    setPassword('');
+        //    setConfirmPassword('');
+        //    console.log(await AsyncStorage.getItem('nameInput'))
+         //   console.log(await AsyncStorage.getItem('emailInput'))
+        //    console.log(await AsyncStorage.getItem('passwordInput'))
+        //    console.log(await AsyncStorage.getItem('confirmPasswordInput'))
+        //    navigation.navigate('MainScreen')
+      //  }
+   // }
 
     return (
         <SafeAreaView style={styles.container} >

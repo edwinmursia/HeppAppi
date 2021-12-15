@@ -18,6 +18,19 @@ const LogInScreen = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const handleSubmit = () => {
+        const information = {email, password}
+        // Replace "192.168.0.12" with your own ip-address.
+        fetch('http://192.168.0.107:5000/api/users/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(information)
+        }).then(() => {
+            console.log('Succesfully logged in!')
+            navigation.navigate('MainScreen')
+        })
+    }
+
     return (
         <SafeAreaView style={styles.container} >
             <TouchableOpacity style={styles.IconWrapper} onPress={goBack}>
@@ -26,9 +39,9 @@ const LogInScreen = () => {
                 <Text style={{ fontSize: 15, fontWeight: 'bold' }} >Takaisin</Text>
             </TouchableOpacity>
             <Image source={require('../images/horse.png')} style={{ height: 200, width: 200, marginBottom: 20, marginTop: 10 }} />
-            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            <TouchableOpacity style={styles.buttonLogIn} onSubmit={submitHandler}>
+            <TextInput style={styles.input} placeholder="Sähköposti" type="email" value={email} onChangeText={(data) => setEmail(data)}/>
+            <TextInput style={styles.input} placeholder="Salasana" secureTextEntry={true} type="password" value={password} onChangeText={(data) => setPassword(data)} />
+            <TouchableOpacity style={styles.buttonLogIn} onPress={handleSubmit}>
                 <Text style={styles.text} >Kirjaudu</Text>
             </TouchableOpacity>
             <TouchableOpacity>
